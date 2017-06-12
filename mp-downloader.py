@@ -21,7 +21,7 @@ if not os.path.exists(filepath):
 for chap in (range(min_chapter, max_chapter + 1)):
     #check for length of chapter
     contents = BeautifulSoup(requests.get(homepage + manga + "/" + str(chap)).content, 'html.parser')
-    print("Downloading chapter" + chap + "of" + max_chapter + "...")
+    print("Downloading chapter", chap, "of", max_chapter, "...")
     for page in range(1, len(contents.find_all("option")) + 1):
         #get image url from html
         contents = BeautifulSoup(requests.get(homepage + manga + "/" + str(chap) + "/" + str(page)).content, 'html.parser')
