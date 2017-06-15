@@ -27,12 +27,12 @@ for chap in (range(min_chapter, max_chapter + 1)):
     pages = len(contents.find_all("option"))
 
     if pages == 0: 
-        print("Chapter " + str(chap) + " not found, skipping..")i
+        print("Chapter " + str(chap) + " not found, skipping..")
 
     for page in range(1, pages + 1):
         #neat progress bar
         sys.stdout.write('\r')
-        sys.stdout.write("Downloading chapter %d of %d [%-50s] page %d/%d" % (chap, max_chapter, '='*int((page/pages)*50), page, pages))
+        sys.stdout.write("Downloading chapter %s of %d [%-50s] page %d/%d" % (str(chap).zfill(len(str(max_chapter))), max_chapter, '='*int((page/pages)*50), page, pages))
         sys.stdout.flush()
 
         #get image url
@@ -40,7 +40,7 @@ for chap in (range(min_chapter, max_chapter + 1)):
         imgurl = contents.find(id="imgholder").find("img").get("src")
 
         #save to file
-        f = open(filepath + manga + "-" + str(chap).zfill(4) + "-" + str(page).zfill(4) + ".jpg", 'wb')
+        f = open(filepath + manga + "-" + str(chap).zfill(4) + "-" + str(page).zfill(len(str(pages))) + ".jpg", 'wb')
         f.write(requests.get(imgurl).content)
         f.close()
     sys.stdout.write('\n')
